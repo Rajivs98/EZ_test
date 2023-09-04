@@ -2,8 +2,7 @@ from flask.blueprints import Blueprint
 from ..handlers.client_handler import Client_handler
 from ..models.client_model import client
 from flask import request, jsonify
-from flask_login import login_required, login_user, logout_user
-from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 blueprint = Blueprint('ez_blueprint',__name__)
@@ -27,8 +26,8 @@ def protected():
 
 @blueprint.route('/logout', methods=['GET'])
 @jwt_required()
-def logout(): 
-    return Client_handler(request.json).logout_user()
+def logout():
+    return Client_handler.logout_user()
 
 @blueprint.route('/sendmail', methods=['GET', 'POST'])
 @jwt_required()
@@ -43,16 +42,16 @@ def verify_email():
 @blueprint.route('/uploadfile', methods=['POST'])
 @jwt_required()
 def uploadfile():
-    return Client_handler(request.json).upload_file()
+    return Client_handler.upload_file()
 
 @blueprint.route('/downloadfile/<filename>', methods=['GET'])
 @jwt_required()
 def downloadfile(filename):
-    return Client_handler(request.json).download_file(filename)
+    return Client_handler.download_file(filename)
 
 
 @blueprint.route('/listallfile', methods=['GET'])
 @jwt_required()
 def list_all_file():
-    return Client_handler(request.json).list_uploaded_files()
+    return Client_handler.list_uploaded_files()
 

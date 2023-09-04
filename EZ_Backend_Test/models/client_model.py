@@ -19,7 +19,7 @@ class client(db.Model):
     name = db.Column(db.String, nullable=False)
     username = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False, unique=True)
     phone = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False)
     role = db.Column(db.String, nullable=False)

@@ -38,7 +38,7 @@ class Client_handler:
 
     def handle(self):
         try:
-            if (client.query.filter_by(username=self.request.username).first()) is not None: 
+            if (client.query.filter_by(email=self.request.email).first()) is not None: 
                 return jsonify({"message": "Username already exists"})
             else:
                 return self.singup_user()
@@ -77,20 +77,16 @@ class Client_handler:
         
     def login_user(self):
         try:
-            uname = self.request.username
+            email_ = self.request.email
             passw = self.request.password
-            user = client.query.filter_by(username=uname).first()
+            user = client.query.filter_by(email=email_).first()
             if user is None:
                 return jsonify({"res": "user not found"})
-            elif user and user.role == 'client':
-                if not check_password_hash(user.password, passw):
-                    return jsonify({"res": "invalid password"})
-                else:
-                    access_token = create_access_token(identity=user.id, expires_delta=False)
-                    
-                return jsonify({"res": "Login Successful", "access_token": access_token}), 200
+            elif not check_password_hash(user.password, passw):
+                return jsonify({"res": "invalid password"})
             else:
-                return jsonify({"res": "you are not authorized"})
+                access_token = create_access_token(identity=user.id, expires_delta=False)
+                return jsonify({"res": "Login Successful", "access_token": access_token}), 200
         except Exception as e:
             return jsonify({"error": str(e)})
 
@@ -149,34 +145,39 @@ class Client_handler:
 
     def upload_file():
         try:
-            accept = ('pptx', 'docx', 'xlsx', 'pdf')
-            # file_path = 'C:/Users/payfi/Desktop/FlaskProject/EZ_Assesment/EZ_Backend_Test/handlers/client_file/'
-            file = request.files['file']
-            print(file)
-            username=request.form.get('username')
-            if file is None or file.filename == '':
-                return jsonify({'resp': 'no file found'})
-            filename = file.filename
-            file_path = 'handlers/client_file/'
-            if file and (filename.split('.')[1]).lower() in accept:
-                # files = filename
-                filename = secure_filename(file.filename)
-                file_path = os.path.join(file_path, filename)
-                file.save(file_path)
-                # with open(f'handlers/client_file/{username}{filename}', 'w+') as file:
-                #     file.write('')
-                #     file.close()
-                filedata = UploadedFile(
-                    filename = filename,
-                    username = username,
-                    file_path = file_path,
-                )
-                db.session.add(filedata)
-                db.session.commit()
+            em = request.form.get('email')
+            user = client.query.filter_by(email=em).first()
+            if user and user.role == 'admin':
+                accept = ('pptx', 'docx', 'xlsx')
+                # file_path = 'C:/Users/payfi/Desktop/FlaskProject/EZ_Assesment/EZ_Backend_Test/handlers/client_file/'
+                file = request.files['file']
+                print(file)
+                username=request.form.get('username')
+                if file is None or file.filename == '':
+                    return jsonify({'resp': 'no file found'})
+                filename = file.filename
+                path = 'handlers/client_file/'
+                if file and ((filename.split('.')[1]).lower() in accept):
+                    # files = filename
+                    fname = secure_filename(file.filename)
+                    file_path = os.path.join(path, fname)
+                    file.save(file_path)
+                    # with open(f'handlers/client_file/{username}{filename}', 'w+') as file:
+                    #     file.write('')
+                    #     file.close()
+                    filedata = UploadedFile(
+                        filename = filename,
+                        username = username,
+                        file_path = file_path,
+                    )
+                    db.session.add(filedata)
+                    db.session.commit()
 
-                return jsonify({'resp': 'file uploaded successfully'})
+                    return jsonify({'resp': 'file uploaded successfully'})
+                else:
+                    return jsonify({'resp': 'file upload failed'})
             else:
-                return jsonify({'resp': 'file upload failed'})
+                return jsonify({'resp': 'you are not allowed to upload'})
         except Exception as e:
             return jsonify({'error': str(e)})
     
