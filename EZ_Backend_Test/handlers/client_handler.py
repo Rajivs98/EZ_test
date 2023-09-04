@@ -85,7 +85,8 @@ class Client_handler:
             elif not check_password_hash(user.password, passw):
                 return jsonify({"res": "invalid password"})
             else:
-                access_token = create_access_token(identity=user.id, expires_delta=False)
+                identity_={"id":user.id, "role":user.role}
+                access_token = create_access_token(identity=identity_, expires_delta=False)
                 return jsonify({"res": "Login Successful", "access_token": access_token}), 200
         except Exception as e:
             return jsonify({"error": str(e)})
@@ -95,6 +96,7 @@ class Client_handler:
         # blacklist = set() 
         try: 
             auth_header = request.headers.get('Authorization')
+
             if auth_header:
                 current_token = auth_header.split()[1]
                 token_info = decode_token(current_token)
@@ -144,10 +146,15 @@ class Client_handler:
     
 
     def upload_file():
-        try:
-            em = request.form.get('email')
-            user = client.query.filter_by(email=em).first()
-            if user and user.role == 'admin':
+        try:   
+            auth_header = request.headers.get('Authorization')
+            decoted_data = decode_token(auth_header.split()[1])
+            user =  decoted_data['sub']['role']
+            print("decoded_data", user)
+            
+            # em = request.form.get('email')
+            # user = client.query.filter_by(email=em).first()
+            if user and user == 'admin':
                 accept = ('pptx', 'docx', 'xlsx')
                 # file_path = 'C:/Users/payfi/Desktop/FlaskProject/EZ_Assesment/EZ_Backend_Test/handlers/client_file/'
                 file = request.files['file']
