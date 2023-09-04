@@ -1,0 +1,221 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "EZ_client",
+    "dateExported": "2023-09-04T08:10:09.994Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "205332fe-ef24-40a9-bd24-6456d21a3fc7",
+            "colId": "cfd54475-c874-487f-b3f5-658155d37742",
+            "containerId": "",
+            "name": "Register",
+            "url": "http://192.168.0.229:5000/ez/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-09-02T13:08:13.884Z",
+            "modified": "2023-09-04T08:09:06.204Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"name\": \"Rajiv Ranjan\",\n    \"username\" : \"Rajiv93\",\n    \"password\": \"12345\",\n    \"email\": \"rahulsingh.r1432s@gmail.com\",\n    \"phone\": \"9999999999\",\n    \"address\": \"Bangalore\",\n    \"role\": \"client\"\n    \n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "a137dde7-44c8-42c0-bab5-80f7ed995c50",
+            "colId": "cfd54475-c874-487f-b3f5-658155d37742",
+            "containerId": "",
+            "name": "Login",
+            "url": "http://192.168.0.229:5000/ez/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-09-02T13:08:50.339Z",
+            "modified": "2023-09-04T08:10:00.785Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"Rajiv91\",\n  \"password\": \"12345\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "7da5e973-3d65-4f2d-b77a-e141ba07a4b6",
+            "colId": "cfd54475-c874-487f-b3f5-658155d37742",
+            "containerId": "",
+            "name": "Logout",
+            "url": "http://192.168.0.229:5000/ez/logout",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-09-02T15:00:46.370Z",
+            "modified": "2023-09-04T08:09:58.984Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mzc1NTU5NCwianRpIjoiNzBhZWQ4YWEtMGI3NC00ZDllLTk4NDUtYTBmMDI5MmY0Njg3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkzNzU1NTk0fQ.-4PKC8A8sMgLlpgR_05YfYjtPy25SVmNCx9k4NOn65w"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6101067a-a5f9-4fe8-8ef9-9898bba69fe4",
+            "colId": "cfd54475-c874-487f-b3f5-658155d37742",
+            "containerId": "",
+            "name": "Upload file",
+            "url": "http://192.168.0.229:5000/ez/uploadfile",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-09-02T18:16:28.838Z",
+            "modified": "2023-09-04T08:09:56.958Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mzc1MzI1NSwianRpIjoiMzUzNGQ0NzYtMzU5NC00OTQyLTliYzYtMTA3Zjk1MjUzZjg4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkzNzUzMjU1LCJleHAiOjE2OTM3NTQxNTV9.sADmnodo1ceYC6h8Y_Hn-VQ_xTgLK3fBu7aT-JmQYJc"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Access-Control-Allow-Origin",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "All",
+                    "value": "",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "username",
+                        "value": "Rajiv98"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "file",
+                        "value": "c:\\Users\\payfi\\Documents\\RAJIV_Resume_new.pdf"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "1439f9fd-410e-4574-bdb0-6bba11f24c7a",
+            "colId": "cfd54475-c874-487f-b3f5-658155d37742",
+            "containerId": "",
+            "name": "Download file",
+            "url": "http://192.168.0.229:5000/ez/downloadfile/RAJIV_Resume_new.pdf",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-09-03T09:12:29.754Z",
+            "modified": "2023-09-04T08:09:55.466Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mzc1MzI1NSwianRpIjoiMzUzNGQ0NzYtMzU5NC00OTQyLTliYzYtMTA3Zjk1MjUzZjg4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkzNzUzMjU1LCJleHAiOjE2OTM3NTQxNTV9.sADmnodo1ceYC6h8Y_Hn-VQ_xTgLK3fBu7aT-JmQYJc"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "82fd264b-de37-4598-9f02-339122ba271c",
+            "colId": "cfd54475-c874-487f-b3f5-658155d37742",
+            "containerId": "",
+            "name": "list uploded file",
+            "url": "http://192.168.0.229:5000/ez/listallfile",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-09-03T10:21:26.462Z",
+            "modified": "2023-09-04T08:09:53.891Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mzc1NTU5NCwianRpIjoiNzBhZWQ4YWEtMGI3NC00ZDllLTk4NDUtYTBmMDI5MmY0Njg3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkzNzU1NTk0fQ.-4PKC8A8sMgLlpgR_05YfYjtPy25SVmNCx9k4NOn65w"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "4b577e2f-0531-4ed9-868d-69c145caf02f",
+            "colId": "cfd54475-c874-487f-b3f5-658155d37742",
+            "containerId": "",
+            "name": "protected",
+            "url": "http://192.168.0.229:5000/ez/protected",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-09-03T15:39:36.021Z",
+            "modified": "2023-09-04T08:09:52.421Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mzc1NTU5NCwianRpIjoiNzBhZWQ4YWEtMGI3NC00ZDllLTk4NDUtYTBmMDI5MmY0Njg3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkzNzU1NTk0fQ.-4PKC8A8sMgLlpgR_05YfYjtPy25SVmNCx9k4NOn65w"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f4ee3c04-380a-45b8-aef2-6a4df8c13f1c",
+            "colId": "cfd54475-c874-487f-b3f5-658155d37742",
+            "containerId": "",
+            "name": "Send mail to verify",
+            "url": "http://192.168.0.229:5000/ez/sendmail",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-09-03T15:42:54.999Z",
+            "modified": "2023-09-04T08:09:50.735Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mzc2NzE3NywianRpIjoiMmEzOGNmYTQtZGFlZC00NDZlLTg0YjMtZmYzMGNiNmI3MDBhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkzNzY3MTc3fQ.39cudouis8Im7h9dLd5DmoKXI53pBxvuKWGmeYeIEB4"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"rajivsonu98@gmail.com\",\n  \"name\": \"Rajiv\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "a5b92b50-5fa7-42ca-8843-dd0b904273a5",
+            "colId": "cfd54475-c874-487f-b3f5-658155d37742",
+            "containerId": "",
+            "name": "Verify mail",
+            "url": "http://192.168.0.229:5000/ez/verifyemail",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2023-09-04T06:07:49.309Z",
+            "modified": "2023-09-04T08:09:48.599Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MzgwOTM3NSwianRpIjoiMzllODQ3MDctNjMxNS00MmE4LThiNzUtODdmZDNlNWQzMDhlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MywibmJmIjoxNjkzODA5Mzc1fQ.WWNqIOE2gJGleEmzD0yPRLmoNzDr3yVX61CcOSwEGRQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"rahulsingh.r1432s@gmail.com\",\n  \"otp\": \"785192\"\n  \n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
