@@ -1,18 +1,16 @@
 from ..models.client_model import client, UploadedFile, Verification_Table
 from dataclasses import dataclass
-from flask import request, jsonify, send_file, Flask
+from flask import request, jsonify, send_file
 from ..db import db
-from flask_mail import Mail, Message
 from typing import Dict
+from .utils import send_email
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from flask_jwt_extended import create_access_token, get_jwt_identity, decode_token
+from flask_jwt_extended import create_access_token, decode_token
 import os
-from .utils import generate_otp
 
 
 blacklist = set()
-mail = Mail()
 
 @dataclass
 class client_request_body:
@@ -110,20 +108,7 @@ class Client_handler:
 
     def send_verification_email(self):
         try:
-            otp = generate_otp()
-            app = Flask(__name__)
-            app.config['MAIL_SERVER']='smtp.gmail.com'
-            app.config['MAIL_PORT'] = 465
-            app.config['MAIL_USERNAME'] = 'rajivbol979@gmail.com'
-            app.config['MAIL_PASSWORD'] = 'ytuc wetb vkii ekzs'
-            app.config['MAIL_USE_TLS'] = False
-            app.config['MAIL_USE_SSL'] = True
-            mail = Mail(app)
-            msg = Message(f"{self.request.name}", sender="rajivbol979@gmail.com", recipients=[f"{self.request.email}"])
-            msg.body = f"Your verification code is {otp}"
-            mail.send(msg)
-            # return jsonify("Message sent successfully")
-            return otp
+            return send_email(self)
         except Exception as e:
             return jsonify({"error": str(e)})
 
