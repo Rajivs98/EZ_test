@@ -7,7 +7,7 @@ from .utils import send_email
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import create_access_token, decode_token
-import os
+import os, base64
 
 
 blacklist = set()
@@ -140,7 +140,7 @@ class Client_handler:
             # em = request.form.get('email')
             # user = client.query.filter_by(email=em).first()
             if user and user == 'admin':
-                accept = ('pptx', 'docx', 'xlsx')
+                accept = ('pptx', 'docx', 'xlsx', 'json')
                 # file_path = 'C:/Users/payfi/Desktop/FlaskProject/EZ_Assesment/EZ_Backend_Test/handlers/client_file/'
                 file = request.files['file']
                 print(file)
@@ -148,15 +148,17 @@ class Client_handler:
                 if file is None or file.filename == '':
                     return jsonify({'resp': 'no file found'})
                 filename = file.filename
-                path = 'handlers/client_file/'
-                if file and ((filename.split('.')[1]).lower() in accept):
+                path = f'handlers/client_file/'
+                if file and (((filename.split('.')[1]).lower()) in accept):
                     # files = filename
-                    fname = secure_filename(file.filename)
+                    fname = secure_filename(f'{username}' + filename)
                     file_path = os.path.join(path, fname)
                     file.save(file_path)
-                    # with open(f'handlers/client_file/{username}{filename}', 'w+') as file:
-                    #     file.write('')
-                    #     file.close()
+                    file.close()
+                    # wf = file.read()
+                    # with open(file_path, 'w+') as f:
+                    #     f.write(wf)
+                    #     f.close()
                     filedata = UploadedFile(
                         filename = filename,
                         username = username,
